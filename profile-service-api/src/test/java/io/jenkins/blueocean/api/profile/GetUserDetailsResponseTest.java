@@ -1,12 +1,8 @@
 package io.jenkins.blueocean.api.profile;
 
-import com.google.common.collect.ImmutableSet;
-import io.jenkins.blueocean.api.profile.model.UserDetails;
-import io.jenkins.blueocean.commons.JsonConverter;
-import io.jenkins.blueocean.security.Credentials;
-//import io.jenkins.blueocean.security.GithubCredentials;
-import org.junit.Assert;
 import org.junit.Test;
+
+//import io.jenkins.blueocean.security.GithubCredentials;
 
 /**
  * @author Vivek Pandey
@@ -28,7 +24,7 @@ public class GetUserDetailsResponseTest {
         Assert.assertEquals(response.userDetails.id, responseFromJson.userDetails.id);
         Assert.assertEquals(response.userDetails.name, responseFromJson.userDetails.name);
         Assert.assertEquals(response.userDetails.email, responseFromJson.userDetails.email);
-        GithubCredentials ld = (GithubCredentials) response.userDetails.getLoginDetails(GithubCredentials.class);
+        GithubCredentials ld = (GithubCredentials) response.userDetails.getCredentials(GithubCredentials.class);
         Assert.assertNotNull(ld);
         Assert.assertEquals(ld.accessToken, accessToken);
         Assert.assertEquals(ld.login, "alice");

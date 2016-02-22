@@ -10,7 +10,6 @@ import org.junit.Test;
 public class GetUserDetailsRequestTest {
     @Test
     public void serializeDeserialize(){
-
         GetUserDetailsRequest request = GetUserDetailsRequest.byUserId("123");
 
         String json = JsonConverter.toJson(request);

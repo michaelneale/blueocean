@@ -2,11 +2,13 @@ package io.jenkins.blueocean.service.embedded;
 
 import com.google.common.collect.ImmutableSet;
 import hudson.model.UserProperty;
+import hudson.security.HudsonPrivateSecurityRealm.Details;
 import hudson.tasks.Mailer;
 import io.jenkins.blueocean.api.profile.model.User;
 import io.jenkins.blueocean.api.profile.model.UserDetails;
 import io.jenkins.blueocean.commons.ServiceException;
 import io.jenkins.blueocean.security.Credentials;
+import io.jenkins.blueocean.security.UsernamePasswordCredentials;
 import io.jenkins.blueocean.service.embedded.properties.CredentialsProperty;
 
 import java.io.IOException;
@@ -19,9 +21,7 @@ public final class Mapper {
     static UserDetails mapUserDetails(hudson.model.User user) {
         Mailer.UserProperty emailProperty = user.getProperty(Mailer.UserProperty.class);
         String email = emailProperty != null ? emailProperty.getAddress() : null;
-        CredentialsProperty credentialsProperty = user.getProperty(CredentialsProperty.class);
-        Set<Credentials> credentials = credentialsProperty != null ? credentialsProperty.credentials : ImmutableSet.<Credentials>of();
-        return new UserDetails(user.getId(), user.getFullName(), email, credentials);
+        return new UserDetails(user.getId(), user.getFullName(), email, mapCredentials(user));
     }
 
     static User mapUser(hudson.model.User user) {
@@ -30,7 +30,14 @@ public final class Mapper {
 
     static Set<Credentials> mapCredentials(hudson.model.User user) {
         CredentialsProperty credentialsProperty = user.getProperty(CredentialsProperty.class);
-        return credentialsProperty != null ? credentialsProperty.credentials : ImmutableSet.<Credentials>of();
+        Details details = user.getProperty(Details.class);
+        Set<Credentials> allExternalCredentials = credentialsProperty != null ? credentialsProperty.credentials : ImmutableSet.<Credentials>of();
+        ImmutableSet.Builder<Credentials> allCredentials = ImmutableSet.<Credentials>builder()
+            .addAll(allExternalCredentials);
+        if (details != null) {
+            allCredentials.add(new UsernamePasswordCredentials(details.getUsername(), details.getPassword()));
+        }
+        return allCredentials.build();
     }
 
     static hudson.model.User mapJenkinsUser(hudson.model.User user, String email, String fullName, Credentials credentials) {

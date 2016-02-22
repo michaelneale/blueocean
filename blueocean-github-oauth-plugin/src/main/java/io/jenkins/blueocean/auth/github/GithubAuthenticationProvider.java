@@ -19,7 +19,6 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 import org.kohsuke.github.RateLimitHandler;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -45,7 +44,6 @@ public class GithubAuthenticationProvider extends AuthenticationProvider<GithubC
     }
 
     @Override
-    @Nonnull
     public UserPrototype validate(GithubCredentials loginDetails) {
         return fetchUser(getAccessToken(loginDetails));
     }
@@ -94,7 +92,7 @@ public class GithubAuthenticationProvider extends AuthenticationProvider<GithubC
     private UserPrototype fetchUser(String accessToken) {
         GHMyself myself = getGhMyself(accessToken);
         try {
-            return new UserPrototype(Objects.firstNonNull(myself.getName(), myself.getLogin()), myself.getEmail());
+            return new UserPrototype(null, Objects.firstNonNull(myself.getName(), myself.getLogin()), myself.getEmail());
         } catch (IOException e) {
             throw new ServiceException.UnexpectedErrorExpcetion("Github user fetch");
         }

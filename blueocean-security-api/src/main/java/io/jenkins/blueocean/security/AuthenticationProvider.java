@@ -15,7 +15,7 @@ public abstract class AuthenticationProvider<T extends Credentials> {
     public abstract T getCredentials(HttpServletRequest req);
 
     /** Validate the credentials. Only called by AuthenticationService */
-    @Nonnull public abstract UserPrototype validate(T loginDetails);
+    public abstract UserPrototype validate(T loginDetails);
 
     /** The type of this provider */
     public abstract String getType();

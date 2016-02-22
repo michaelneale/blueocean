@@ -5,27 +5,24 @@ import io.jenkins.blueocean.security.Credentials;
 import io.jenkins.blueocean.security.UserPrototype;
 
 public final class CreateUserRequest {
+    @JsonProperty("userPrototype")
+    public final UserPrototype userPrototype;
     @JsonProperty("authType")
     public final String authType;
-    @JsonProperty("fullName")
-    public final String fullName;
-    @JsonProperty("email")
-    public final String email;
     @JsonProperty("credentials")
     public final Credentials credentials;
 
-    public CreateUserRequest(@JsonProperty("authType") String authType,
-                             @JsonProperty("fullName") String fullName,
-                             @JsonProperty("email") String email,
-                             @JsonProperty("credentials") Credentials credentials) {
+    public CreateUserRequest(
+        @JsonProperty("userPrototype") UserPrototype userPrototype,
+        @JsonProperty("authType") String authType,
+        @JsonProperty("credentials") Credentials credentials) {
+        this.userPrototype = userPrototype;
         this.authType = authType;
-        this.fullName = fullName;
-        this.email = email;
         this.credentials = credentials;
     }
 
     /** Create a new user from a UserPrototype */
     public static CreateUserRequest fromUserPrototype(UserPrototype userPrototype, String authType, Credentials credentials) {
-        return new CreateUserRequest(authType, userPrototype.fullName, userPrototype.email, credentials);
+        return new CreateUserRequest(userPrototype, authType, credentials);
     }
 }

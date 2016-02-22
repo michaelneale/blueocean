@@ -58,7 +58,7 @@ public class UserDetails {
      */
     @JsonIgnore
     @SuppressWarnings("unchecked")
-    @Nullable public <T extends Credentials> Credentials getLoginDetails(Class<T> loginDetailsClass) {
+    @Nullable public <T extends Credentials> Credentials getCredentials(Class<T> loginDetailsClass) {
         return Maps.uniqueIndex(this.credentials, new Function<Credentials, Class<Credentials>>() {
             @Override
             public Class<Credentials> apply(@Nullable Credentials credentials) {

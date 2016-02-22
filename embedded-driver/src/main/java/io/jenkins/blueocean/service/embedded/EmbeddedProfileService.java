@@ -1,6 +1,5 @@
 package io.jenkins.blueocean.service.embedded;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -26,7 +25,6 @@ import io.jenkins.blueocean.commons.ServiceException;
 import io.jenkins.blueocean.commons.ServiceException.NotFoundException;
 import io.jenkins.blueocean.security.Credentials;
 import io.jenkins.blueocean.security.Identity;
-import io.jenkins.blueocean.service.embedded.properties.CredentialsProperty;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -98,7 +96,7 @@ public class EmbeddedProfileService extends AbstractEmbeddedService implements P
     @Nonnull
     public CreateUserResponse createUser(@Nonnull Identity identity, @Nonnull CreateUserRequest request) {
         hudson.model.User user;
-        String userId = Objects.firstNonNull(request.email, request.fullName);
+        String userId = request.userPrototype.getPreferredUsernameSeed();
         if (Strings.isNullOrEmpty(userId)) {
             throw new ServiceException.UnprocessableEntityException("could not synthesise a user id");
         }
@@ -127,7 +125,7 @@ public class EmbeddedProfileService extends AbstractEmbeddedService implements P
         } else {
             throw new ServiceException.TooManyRequestsException("could not create user");
         }
-        return new CreateUserResponse(Mapper.mapUserDetails(Mapper.mapJenkinsUser(user, request.email, request.fullName, request.credentials)));
+        return new CreateUserResponse(Mapper.mapUserDetails(Mapper.mapJenkinsUser(user, request.userPrototype.email, request.userPrototype.fullName, request.credentials)));
     }
 
     /** Safe way to query a user without creating it at the same time */
