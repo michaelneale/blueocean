@@ -16,8 +16,16 @@
 
   <dependencies>
       <dependency>
+          <groupId>io.jenkins.blueocean</groupId>
+          <artifactId>blueocean-commons</artifactId>
+      </dependency>
+      <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-annotations</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
       </dependency>
   </dependencies>
 </project>

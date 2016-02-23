@@ -33,8 +33,6 @@
     <module>bravo</module>
     <module>war</module>
     <module>all</module>
-    <module>authentication-service-api</module>
-    <module>authentication-service</module>
   </modules>
 
   <repositories>
@@ -69,12 +67,6 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>authentication-service-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>blueocean-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -100,12 +92,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>blueocean-github-oauth-plugin</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>blueocean-authentication-service</artifactId>
             <version>${project.version}</version>
         </dependency>
 

@@ -34,10 +34,6 @@
             <artifactId>profile-service-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>authentication-service-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
         </dependency>

@@ -1,4 +1,4 @@
-package io.jenkins.blueocean.service.embedded;
+package io.jenkins.blueocean.driver.embedded;
 
 import io.jenkins.blueocean.api.profile.FindUsersRequest;
 import io.jenkins.blueocean.api.profile.FindUsersResponse;

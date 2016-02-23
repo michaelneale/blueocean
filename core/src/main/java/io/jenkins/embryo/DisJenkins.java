@@ -11,7 +11,7 @@ import hudson.model.View;
 import hudson.model.ViewGroup;
 import hudson.model.listeners.ItemListener;
 import hudson.util.PluginServletFilter;
-import io.jenkins.blueocean.security.AuthenticationFilter;
+import io.jenkins.blueocean.security.AbstractAuthenticationFilter;
 import jenkins.model.Jenkins;
 import org.kohsuke.stapler.StaplerProxy;
 import org.kohsuke.stapler.StaplerRequest;
@@ -77,7 +77,7 @@ public class DisJenkins extends View implements StaplerProxy {
      * @throws IOException in case something goes wrong when creating views or when saving Jenkins configuration
      */
     @Initializer(after= InitMilestone.JOB_LOADED, before= InitMilestone.COMPLETED)
-    public static void install(Jenkins j, AuthenticationFilter authFilter) throws IOException {
+    public static void install(Jenkins j) throws IOException {
         LOGGER.log(Level.INFO, "Configuring Embryo Root View");
         DisJenkins v = new DisJenkins("Root", j);
         j.addView(v);
@@ -95,7 +95,7 @@ public class DisJenkins extends View implements StaplerProxy {
 
         }
         try {
-            PluginServletFilter.addFilter(authFilter);
+            PluginServletFilter.addFilter(AbstractAuthenticationFilter.get());
         } catch (ServletException e) {
            throw new IOException("AuthenticationFilter failed to initialize.", e);
         }
@@ -111,13 +111,10 @@ public class DisJenkins extends View implements StaplerProxy {
         @Inject
         private Jenkins jenkins;
 
-        @Inject
-        private AuthenticationFilter authFilter;
-
         @Override
         public void onLoaded() {
             try {
-                install(jenkins, authFilter);
+                install(jenkins);
             } catch (IOException e) {
                 LOGGER.log(Level.INFO, "Failed to install Embryo");
             }

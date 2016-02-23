@@ -1,4 +1,4 @@
-package io.jenkins.blueocean.service.embedded;
+package io.jenkins.blueocean.driver.embedded;
 
 import com.google.common.collect.ImmutableMap;
 import hudson.model.FreeStyleBuild;
@@ -13,8 +13,8 @@ import io.jenkins.blueocean.api.pipeline.GetPipelineResponse;
 import io.jenkins.blueocean.api.pipeline.GetPipelineRunRequest;
 import io.jenkins.blueocean.api.pipeline.GetPipelineRunResponse;
 import io.jenkins.blueocean.api.pipeline.PipelineService;
-import io.jenkins.blueocean.security.Identity;
 import io.jenkins.blueocean.commons.JsonConverter;
+import io.jenkins.blueocean.security.Identity;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

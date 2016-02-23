@@ -1,4 +1,4 @@
-package io.jenkins.blueocean.service.embedded;
+package io.jenkins.blueocean.driver.embedded.service;
 
 import io.jenkins.blueocean.commons.ServiceException;
 import jenkins.model.Jenkins;

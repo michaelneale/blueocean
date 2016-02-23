@@ -1,6 +1,5 @@
-package io.jenkins.blueocean.service.embedded;
+package io.jenkins.blueocean.driver.embedded.service;
 
-import hudson.Extension;
 import hudson.model.Project;
 import hudson.model.Result;
 import hudson.util.RunList;
@@ -16,8 +15,8 @@ import io.jenkins.blueocean.api.pipeline.PipelineService;
 import io.jenkins.blueocean.api.pipeline.model.JobResult;
 import io.jenkins.blueocean.api.pipeline.model.Pipeline;
 import io.jenkins.blueocean.api.pipeline.model.Run;
-import io.jenkins.blueocean.security.Identity;
 import io.jenkins.blueocean.commons.ServiceException;
+import io.jenkins.blueocean.security.Identity;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

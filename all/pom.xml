@@ -31,10 +31,6 @@
       <artifactId>embedded-driver</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.jenkins.blueocean</groupId>
-      <artifactId>blueocean-authentication-service</artifactId>
-    </dependency>
-    <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>blueocean-github-oauth-plugin</artifactId>
     </dependency>
