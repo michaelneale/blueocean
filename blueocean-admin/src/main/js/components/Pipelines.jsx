@@ -6,6 +6,8 @@ import Table from './Table';
 import { Page, PageHeader, Title } from '@jenkins-cd/design-language';
 import { ExtensionPoint } from '@jenkins-cd/js-extensions';
 
+import SampleIcon from './stories/SampleIcon.jsx';
+
 const { array } = PropTypes;
 
 export default class Pipelines extends Component {
@@ -38,6 +40,7 @@ export default class Pipelines extends Component {
                 </PageHeader>
                 <main>
                     <article>
+                        <SampleIcon />
                         <ExtensionPoint name="jenkins.pipeline.list.top" />
                         <Table
                           className="multiBranch"
