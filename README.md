@@ -1,5 +1,7 @@
 This is the BlueOcean repo. It is a multi-module maven project. Each sub-directory at the root of the repo is jenkins extension.
 
+[![Git](https://app.soluble.cloud/api/v1/public/badges/26353615-f7d5-4b57-8d77-dbaec52ae77d.svg?orgId=451115019187)](https://app.soluble.cloud/repos/details/github.com/michaelneale/blueocean?orgId=451115019187)  
+
 
 Blue Ocean is the new UI project for Jenkins.
 
